@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fondo celeste al hacer click */
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* Fondo del autocompletado */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: rgb(9, 9, 9) !important;
+}
