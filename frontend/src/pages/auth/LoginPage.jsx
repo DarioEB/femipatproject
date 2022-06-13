@@ -1,14 +1,43 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Formik,
     Form,
     Field
 } from 'formik';
+import * as Yup from 'yup';
+import { AuthContext } from '../../context'; 
+import {
+    ErrorField, SweetAlert
+} from '../../components'
 
 const LoginPage = () => {
 
     const [rem, setRem] = useState(false);
+
+    const { loginUser } = useContext(AuthContext);
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().required('No puedes enviar campos vacíos'),
+        password: Yup.string().required('No puedes enviar campos vacíos')
+    });
+
+    const onHandleSubmit = async (values, resetForm) => {
+        const response = await loginUser(values);
+
+        if(!response.ok) {
+            SweetAlert(
+                response.message,
+                'Error de logueo',
+                'error',
+                'Ok',
+                function() {
+                    console.log('Error');
+                }
+            )
+        }
+    }
+
 
     return (
         <>
@@ -17,6 +46,9 @@ const LoginPage = () => {
                     email: '',
                     password: ''
                 }}
+                enableReinitialize={true}
+                validationSchema={validationSchema}
+                onSubmit={ async (values, {resetForm}) => onHandleSubmit(values, resetForm)}
             >
                 {({errors, touched}) => (
                     <Form
@@ -31,13 +63,20 @@ const LoginPage = () => {
                                     htmlFor='email'
                                     className='block mb-0.5 text-xs pl-2 text-gray-600 font-medium tracking-wide'
                                 >E-mail</label>
-                                <Field 
-                                    className='p-1.5 border border-gray-200 placeholder:text-gray-200 focus:border-gray-300 outline-none transition-all duration-500 w-full rounded'
-                                    id='email'
-                                    name='email'
-                                    placeholder='Tu Correo Electrónico'
-                                    type='email'
-                                />
+                                <div>
+                                    <Field 
+                                        className='p-1.5 border text-sm border-gray-300 placeholder:text-gray-300 focus:border-gray-400 outline-none transition-all duration-500 w-full rounded'
+                                        id='email'
+                                        name='email'
+                                        placeholder='Tu Correo Electrónico'
+                                        type='email'
+                                    />
+                                </div>
+                                {(errors.email && touched.email) && (
+                                    <ErrorField 
+                                        message={errors.email}
+                                    />
+                                )}
                             </div>
 
                             <div className='mt-3'>
@@ -45,13 +84,20 @@ const LoginPage = () => {
                                     htmlFor='password'
                                     className='block mb-0.5 text-xs pl-2 text-gray-600 font-medium tracking-wide'
                                 >Password</label>
-                                <Field 
-                                    className='p-1.5 border border-gray-200 placeholder:text-gray-200 focus:border-gray-300 outline-none transition-all duration-500 w-full rounded'
-                                    id='password'
-                                    name='password'
-                                    placeholder='Tu Contraseña'
-                                    type='password'
-                                />
+                                <div>
+                                    <Field 
+                                        className='p-1.5 border text-sm border-gray-300 placeholder:text-gray-300 focus:border-gray-400 outline-none transition-all duration-500 w-full rounded'
+                                        id='password'
+                                        name='password'
+                                        placeholder='Tu Contraseña'
+                                        type='password'
+                                    />
+                                </div>
+                                {(errors.password && touched.password) && (
+                                    <ErrorField 
+                                        message={errors.password}
+                                    />
+                                )}
                             </div>
 
                             <div className='mt-4 flex flex-row-reverse tracking-wider items-center justify-start gap-2 text-gray-400 text-sm font-medium transition-all duration-500'>

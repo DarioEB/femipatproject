@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import {
     AuthLayout, 
     DashLayout
@@ -7,22 +7,26 @@ import {
 import {
     AuthenticationPage,
     LoginPage, 
-    SignUpPage
+    SignUpPage,
+    UsersPage
 } from '../pages';
 
 export const Router = () => {
+    
 
     return (
         <Routes>
             <Route path={'/'} element={<AuthLayout />}>
-                <Route path={'login'} element={<LoginPage />} />
+                <Route index element={<LoginPage />} />
                 <Route path={'sign-up/:signToken'} element={<SignUpPage />} />
                 <Route path={'auth/:token'} element={<AuthenticationPage />} />
+                <Route path={'*'} element={<Navigate to={'/'} />} />
             </Route>
 
 
             <Route path={'/dashboard'} element={<DashLayout />}>
-
+                <Route path={'users'} element={<UsersPage />} />
+                <Route path={'*'} element={<Navigate to={'/'} />} />
             </Route>
         </Routes>
     )

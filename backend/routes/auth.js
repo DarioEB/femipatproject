@@ -7,6 +7,7 @@ import {
     deleteAllUsers,
     getAllUsers,
     getUserBySignToken,
+    loginUser,
     signUpUser
 } from '../controllers/authController.js';
 import validateFields from '../middlewares/validateFields.js';
@@ -46,6 +47,15 @@ router.get(
     '/sign-up/:signToken',
     getUserBySignToken
 );
+
+router.post(
+    '/login',
+    [
+        check(['email', 'password'], 'No puedes enviar campos vacíos, revise sus entradas').not().isEmpty(),
+        validateFields
+    ],
+    loginUser
+)
 
 router.get(
     '/',

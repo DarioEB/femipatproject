@@ -14,3 +14,33 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: rgb(9, 9, 9) !important;
 }
+
+/* Sweetalert */
+.swal2-popup {
+    background: white !important;
+    border: 2px solid #e1e1e1;
+}
+.swal2-icon {
+
+}
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right,
+.swal2-success-dix {
+    /* background: ¿ */
+}
+.swal2-title {
+    color:rgb(9, 9, 9) !important;
+}
+.swal2-html-container{
+    color: rgb(156 163 175) !important;
+    font-weight: medium !important;
+}
+.swal2-confirm {
+    background: rgb(55 48 163) !important;
+}
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: rgb(55 48 163) !important;
+}
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: none !important;
+}

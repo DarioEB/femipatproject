@@ -20,14 +20,14 @@ export const Sidebar = () => {
             <nav className='flex flex-col gap-0.5 px-4 py-4'>
                 <Link
                     to={'/dashboard'}
-                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-100 p-2 rounded flex items-center gap-2 transition-all duration-300'
+                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-300 p-2 rounded flex items-center gap-2 transition-all duration-300'
                 >
                     <i className='fa-solid w-6 flex items-center text-slate-400 justify-center fa-home'></i>
                     Dashboard
                 </Link>
                 <Link
                     to={'/'}
-                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-100 p-2 rounded flex items-center gap-2 transition-all duration-300'
+                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-300 p-2 rounded flex items-center gap-2 transition-all duration-300'
                 >
                     <i className='fa-solid w-6 flex items-center text-slate-400 justify-center fa-flag'></i>
                     Eventos
@@ -35,7 +35,7 @@ export const Sidebar = () => {
 
                 <Link
                     to={'/'}
-                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-100 p-2 rounded flex items-center gap-2 transition-all duration-300'
+                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-300 p-2 rounded flex items-center gap-2 transition-all duration-300'
                 >
                     <i className="fa-solid w-6 flex items-center text-slate-400 justify-center fa-id-badge"></i>
                     Licencias
@@ -43,15 +43,15 @@ export const Sidebar = () => {
 
                 <Link
                     to={'/'}
-                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-100 p-2 rounded flex items-center gap-2 transition-all duration-300'
+                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-300 p-2 rounded flex items-center gap-2 transition-all duration-300'
                 >
                     <i className="fa-solid w-6 flex items-center text-slate-400 justify-center fa-users-between-lines"></i>
                     Competidores
                 </Link>
 
                 <Link
-                    to={'/'}
-                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-100 p-2 rounded flex items-center gap-2 transition-all duration-300'
+                    to={'/dashboard/users'}
+                    className='text-slate-600 font-medium hover:text-slate-800 hover:bg-gray-300 p-2 rounded flex items-center gap-2 transition-all duration-300'
                 >
                     <i className="fa-solid w-6 flex items-center text-slate-400 justify-center fa-users"></i>
                     Usuarios

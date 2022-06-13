@@ -142,7 +142,12 @@ export const getUserBySignToken = async (req, res) => {
 
     return res.status(200).json({
         ok: true,
-        user
+        user: {
+            _id: user._id,
+            email: user.email,
+            role: user.role,
+            signToken: user.signToken
+        }
     });
 }
 
@@ -152,6 +157,40 @@ export const getAllUsers = async (req, res) => {
     res.status(200).json({
         users
     });
+}
+
+export const loginUser = async (req, res) => {
+    const { email = '', password = '' } = req.body;
+
+    const user = await User.findOne({email});
+
+    if(!user) {
+        return res.status(400).json({
+            ok: false,
+            message: 'Los datos ingresados no son correctos'
+        });
+    }
+
+    if(!bcryptjs.compareSync(password, user.password)) {
+        return res.status(400).json({
+            ok: false,
+            message: 'Los datos ingresados no son correctos'
+        });
+    }
+
+    const token = jwt.signToken(user._id, user.email);
+    
+    return res.status(200).json({
+        ok: true,
+        user: {
+            _id: user._id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email
+        },
+        token,
+        message: 'Usuario logueado'
+    })
 }
 
 export const signUpUser = async (req, res) => {
@@ -203,10 +242,18 @@ export const signUpUser = async (req, res) => {
     req.user = user;
 
     // TODO: enviar email de registro completado y token de autenticación
+    const token = jwt.signToken(user._id, user.email);
 
     return res.status(200).json({
         ok: true,
-        user,
+        user: {
+            _id: user._id,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            role: user.role
+        },
+        token,
         message: 'El registro se completó correctamente, revisa tu email para confirmar tus datos'
     });
 }

@@ -1,7 +1,18 @@
-import { Outlet } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context';
 import Logo from '../../assets/img/logo-femipat.png'
-
 export const AuthLayout = () => {
+
+    const navigate = useNavigate();
+
+    const { authenticated } = useContext(AuthContext);
+
+    useEffect( () => {
+        if(authenticated) {
+            navigate('/dashboard')
+        }
+    }, [authenticated]);
 
     return (
         <main className='bg-gray-100 '>
